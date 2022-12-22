@@ -117,8 +117,8 @@ async def view_note(query: types.CallbackQuery):
 '''
         kb = kbs.note_menu_keyboard(note.id)
         return await app.edit_message_text(text, chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=kb)
-    except:
-        raise
+    except Exception as e:
+        print(str(e))
         text = '📛 <b>Упс :(</b>\n\nЧто-то пошло не по плану...'
         return await app.edit_message_text(text, chat_id=query.message.chat.id, message_id=query.message.message_id)
 
@@ -150,7 +150,8 @@ async def delete_note(query: types.CallbackQuery):
         delete = db.update_note(data['id'], status=1)
         text = f'✅ <b>Заметка</b> <code>№{note.id}</code> <b>успешно удалена!</b>'
         return await app.edit_message_text(text, chat_id=query.message.chat.id, message_id=query.message.message_id)
-    except:
+    except Exception as e:
+        print(str(e))
         text = '📛 <b>Упс :(</b>\n\nЧто-то пошло не по плану...'
         return await app.edit_message_text(text, chat_id=query.message.chat.id, message_id=query.message.message_id)
 
@@ -165,7 +166,8 @@ async def add_note_text(message: types.Message, state: FSMContext):
         #state = dp.current_state(chat=message.chat.id, user=message.from_user.id)
         await Notes.next()
         return await message.reply(text, reply_markup=kb)
-    except:
+    except Exception as e:
+        print(str(e))
         try:
             await state.finish()
         except:

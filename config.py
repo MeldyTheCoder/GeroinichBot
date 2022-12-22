@@ -1,3 +1,4 @@
+import os
 
 # токен из @BotFather в ТГ
 botToken = '5982648910:AAH4QQ5Jj_bGpFndVtEp6dwCJpzLfxpDtPE'
@@ -10,3 +11,5 @@ graduate_group = 2
 chat_id = -1001710444985
 
 note_checker_cooldown = 1*60*60
+
+project_root = os.path.dirname(__file__)

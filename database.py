@@ -2,6 +2,8 @@ import os
 import sqlite3
 from typing import Optional, Union
 import functools
+
+import config
 from time_manager import TimeManager
 
 def message(func, e):
@@ -61,6 +63,7 @@ class DatabaseObject(object):
 
 class Database:
     def __init__(self, path: Union[os.PathLike, str] = 'db.sqlite'):
+        path = os.path.join(config.project_root, 'db.sqlite')
         self.__db = sqlite3.connect(path)
         self.__db.row_factory = dict_factory
         self.__cursor = self.__db.cursor()
